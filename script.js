@@ -1,5 +1,6 @@
 // add javascript here
-date.textContent = time();
+// date.textContent = time();
+const unused = setInterval(time, 1000); // Calls time every 3 seconds (3000 milliseconds)
 //globle variables
 let score, answer, level;
 const levelArr = document.getElementsByName("level");
@@ -7,19 +8,36 @@ const scoreArr = [];
 //event listeners
 playBtn.addEventListener("click",play);
 guessBtn.addEventListener("click", makeGuess);
+tries = ["try", "tries"];
 
 function time(){
     let d = new Date();
     // concatenate the date and time
-    let str = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
-    console.log(str);
-    return str;
+    months = ["January", "February", "March", "April", "May", "June", "July", "August",
+        "September", "October", "November", "December"];
+    prefixes = ["st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+        "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+        "st"];
+    minutes = d.getMinutes();
+    if(minutes<10){
+        minutes = "0" + minutes;
+    }
+    seconds = d.getSeconds();
+    if(seconds<10){
+        seconds = "0" + seconds;
+    }
+    let str = d.getHours() + ":" + minutes + ":" + seconds + "<br>"+
+    months[d.getMonth()] + " " + d.getDate() + prefixes[d.getDate()] + ", " + d.getFullYear();
+    // console.log(str);
+    date.innerHTML = str;
 }
 
 function play(){
     playBtn.disabled = true;
     guessBtn.disabled = false;
     guess.disabled = false;
+    giveUp.disabled = false;
     for(let i=0; i<levelArr.length; i++){
         levelArr[i].disabled = true;
         if(levelArr[i].checked){
@@ -30,8 +48,17 @@ function play(){
     msg.textContent = "Guess a number between 1-" + level + ", inclusive";
     guess.placeholder = answer;
     score = 0;
+    giveUp.addEventListener("click", function(){
+        msg.textContent = "The answer was " + answer + ". You gave up after " + score + " try/tries.";
+        reset();
+    });
 }
 function makeGuess(){
+    giveUp.addEventListener("click", function(){
+        msg.textContent = "The answer was " + answer + ". You gave up after " + score + " try/tries.";
+        reset();
+    });
+
     let userGuess = parseInt(guess.value);
     let outputStr = "";
     if(isNaN(userGuess)){
@@ -52,7 +79,7 @@ function makeGuess(){
             outputStr += "Cold"
         }
     }else{
-        outputStr = "Correct!" + score + "tries." 
+        outputStr = "Correct! " + score + " try(s)." 
         reset();
         updateScore();
     }
