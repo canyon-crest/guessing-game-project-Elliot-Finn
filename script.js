@@ -53,7 +53,7 @@ function updateTimer() {
 
 function startTimer() {
   starttime = Date.now();
-  updateTimer();                      // show 0s immediately
+  updateTimer();
   timer = setInterval(updateTimer, 250);
 }
 
