@@ -7,21 +7,38 @@
   <body>
     <p id="date"></p>
 
-    <h3>Level</h3>
-    <input type="radio" name="level" id="e" value="3" checked><label for="e">Easy</label>
-    <input type="radio" name="level" id="m" value="10"><label for="m">Medium</label>
-    <input type="radio" name="level" id="h" value="100"><label for="h">Hard</label>
+    <p id="time"></p>
 
-    <button id="playBtn">Play</button>
+    <h1>Number Guessing Game</h1>
+    <p id="name">What is your name?</p>
+    <input type="text" id="playerName">
+    <button id="enter">Enter name</button>
+
+    <h3>Levels:</h3>
+    <input type="radio" name="level" id="e" value="3" checked disabled><label for="e">Easy</label>
+    <input type="radio" name="level" id="m" value="10" disabled><label for="m">Medium</label>
+    <input type="radio" name="level" id="h" value="100" disabled><label for="h">Hard</label>
+
+    <button id="playBtn" disabled>Play</button>
 
     <h3 id="msg">Select a Level</h3>
     <input type="text" id="guess" disabled>
     <button id="guessBtn" disabled>Guess</button>
     <button id="giveUp" disabled>Give Up</button>
 
+    <button id="hintBtn" disabled>Get a Hint</button>
+    <h3>Hints:</h3>
+    <ul>
+      <p id="hints">
+      <li></li>
+      </p>
+    </ul>
+
     <h3>Stats</h3>
     <p id="wins">Total wins: 0</p>
     <p id="avgScore">Average Score: </p>
+    <p id="avgTime">Average Time: </p>
+    <p id="bestTime">Fastest Time: </p>
 
     <h3>Leaderboard</h3>
     <ol>
